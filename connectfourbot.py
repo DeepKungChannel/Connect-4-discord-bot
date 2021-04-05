@@ -222,7 +222,7 @@ async def mode(ctx,mode:):
         await ctx.send("Change to mode 1.")
     if mode == '2':
         modes = 2
-        await ctx.send("Change to mode 1.")
+        await ctx.send("Change to mode 2.")
 
 
 @mode.error
