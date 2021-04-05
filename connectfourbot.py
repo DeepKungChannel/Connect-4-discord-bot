@@ -169,12 +169,7 @@ def render(board_render):
                 line += (":yellow_circle:" + ' ')
         if count <= len(board_render)-2:
             line += "\n"
-    if modes == 1:
-        return line
-    elif modes == 2:
-        embed = discord.Embed(title="Connect 4 Game",color=discord.Color.green())
-        embed.add_field(name='Display',value=line)
-        return embed
+    return line
 
 
 def windetect(board,turn):
@@ -219,10 +214,21 @@ async def stop(ctx):
         await ctx.send("The Game has stopped")
         print("The Game has stopped")
 
+@client.command()
+async def mode(ctx,mode:):
+    global modes
+    if mode == '1':
+        modes = 1
+        await ctx.send("Change to mode 1.")
+    if mode == '2':
+        modes = 2
+        await ctx.send("Change to mode 1.")
+
 
 @mode.error
 async def mode_error(ctx,error):
-    text = "Mode:\n    1. print a game in text\n    2. print a game in embed format"
+    global modes
+    text = "Mode:\n    1. Play in 1 device\n    2. Play with your friend\nCurrent: {}".format(modes)
     if isinstance(error,commands.MissingRequiredArgument):
         await ctx.send(text)
 
